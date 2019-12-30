@@ -155,7 +155,12 @@ export default function SignInSide() {
         isActive: true,
         todoType: 'active',
         todoStatus: ''
-      }]
+      },
+    ],
+    txtWhereToDo: '',
+      txtWhatToDo: '',
+      drpdTodoType: '',
+      txtWhen: null,
     }));
 
     console.log(state);
