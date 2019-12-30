@@ -50,10 +50,8 @@ export default function ImgMediaCard(props) {
             //Looping through all data
             props.state.allTodoData.map((item, index) =>
 
-           
                 <Grid item xs={12} md={12} key={index.toString()}>
                     <Card className={classes.card}>
-
                         <CardActionArea>
                             {/*<CardMedia
                                             component="img"

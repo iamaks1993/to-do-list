@@ -129,6 +129,7 @@ export default function SignInSide() {
         break;
       }
     }
+    console.log(data);
     setState({
       ...state,
       allTodoData: data
