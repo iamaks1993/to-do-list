@@ -13,6 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import NoDataFound from './TabNoDataFound';
 import { IconButton } from '@material-ui/core';
+import UndoIcon from '@material-ui/icons/Undo';
 
 
 
@@ -75,7 +76,8 @@ export default function ImgMediaCard(props) {
                             <IconButton size="small"
                                 onClick={()=> props.handleChangeTodoStatus(item.todoType,item.counterId)}
                                >
-                                <CheckIcon />
+                                {item.todoType === 'active' ? <CheckIcon /> : <UndoIcon /> }
+                               
                             </IconButton>
                             <IconButton size="small"
                                 onClick={()=> props.handleRemoval(item.counterId)}
