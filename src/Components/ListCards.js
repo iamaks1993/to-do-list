@@ -13,6 +13,7 @@ import NoDataFound from './TabNoDataFound';
 import { IconButton } from '@material-ui/core';
 import UndoIcon from '@material-ui/icons/Undo';
 import moment from 'moment';
+import ReactTooltip from 'react-tooltip'
 
 import CardMedia from "@material-ui/core/CardMedia";
 import EventNoteIcon from '@material-ui/icons/EventNote';
@@ -31,13 +32,14 @@ export default function ImgMediaCard(props) {
 
     function getDataBasedOnRequestType(tabType,todoSearchFor) {
 
+        const dateFormat = "DD/MM/YYYY";
         let tabTypeBasedData =  (tabType == 'all') ? props.state.allTodoData : props.state.allTodoData.filter((obj) => obj.todoType === tabType);
         if(todoSearchFor == "today") {
-            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format("DD/MM/YYYY") == moment().format("DD/MM/YYYY"));
+            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format(dateFormat) == moment().format("DD/MM/YYYY"));
         } else if (todoSearchFor == "upcoming") {
-             tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format("DD/MM/YYYY") > moment().format("DD/MM/YYYY"));
+             tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format(dateFormat) > moment().format("DD/MM/YYYY"));
         } else {
-            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format("DD/MM/YYYY") < moment().format("DD/MM/YYYY"));
+            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format(dateFormat) < moment().format("DD/MM/YYYY"));
         }
         return tabTypeBasedData;
     }
@@ -58,13 +60,13 @@ export default function ImgMediaCard(props) {
                     <Grid item xs={12} md={12} key={index.toString()}>
                         <Card className={classes.card}>
                             <CardActionArea>
-                                {/*<CardMedia
+                                <CardMedia
                                                 component="img"
                                                 alt="Contemplative Reptile"
                                                 height="140"
                                                 image="/images/contemplative-reptile.jpg"
                                                 title="Contemplative Reptile"
-                                /> */ }
+                                />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {item.txtWhatToDo}  {item.txtWhenDiffFormat}
@@ -79,14 +81,16 @@ export default function ImgMediaCard(props) {
                                 <IconButton size="small"
                                     onClick={()=> props.handleChangeTodoStatus(item.todoType,item.counterId)}
                                 >
-                                    {item.todoType === 'active' ? <CheckIcon /> : <UndoIcon /> }
+                                    {item.todoType === 'active' ? <CheckIcon data-for='handleChangeTodoStatus' data-tip='Click to complete'/> : <UndoIcon data-for='handleChangeTodoStatus' data-tip='Click to undo'/> }
                                 
                                 </IconButton>
+                                
                                 <IconButton size="small"
                                     onClick={()=> props.handleRemoval(item.counterId)}
                                 >
-                                    <DeleteIcon title="Delete Todo"/>
+                                    <DeleteIcon data-for='handleChangeTodoStatus' data-tip='Click to delete'/>
                                 </IconButton>
+                                <ReactTooltip place="bottom" id='handleChangeTodoStatus' getContent={(dataTip) => `${dataTip}`}/>
                             </CardActions>
                         </Card>
                     </Grid>
