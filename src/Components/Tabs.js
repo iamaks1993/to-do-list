@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -72,13 +72,13 @@ export default function SimpleTabs(props) {
       <Scrollbars style={{ height: "310px" }}>
        <div style={{maxHeight:"200px"}}> 
           <TabPanel value={value} index={0} className={classes.tabsPanel}>
-              <ImgMediaCard state = {props.state} tabType = {'all'}/>
+              <ImgMediaCard state = {props.state} tabType = {'all'} handler = {props.handler} handleRemoval = {props.handleRemoval} handleChangeTodoStatus = {props.handleChangeTodoStatus}/>
           </TabPanel>
           <TabPanel value={value} index={1} className={classes.tabsPanel}>
-              <ImgMediaCard state = {props.state} tabType = {'done'}/>
+              <ImgMediaCard state = {props.state} tabType = {'done'} handler = {props.handler} handleRemoval = {props.handleRemoval} handleChangeTodoStatus = {props.handleChangeTodoStatus}/>
           </TabPanel>
           <TabPanel value={value} index={2} className={classes.tabsPanel}>
-            <ImgMediaCard state = {props.state} tabType = {'active'}/>
+            <ImgMediaCard state = {props.state} tabType = {'active'} handler = {props.handler} handleRemoval = {props.handleRemoval} handleChangeTodoStatus = {props.handleChangeTodoStatus} />
           </TabPanel>
         </div>
       </Scrollbars>

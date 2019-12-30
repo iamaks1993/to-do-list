@@ -88,28 +88,52 @@ export default function SignInSide() {
     txtWhen: null,
     allTodoData: [],
     counterId: 0,
-    todoSearchFor : 'today'
+    todoSearchFor: 'today'
   })
   const handleDateChange = date => {
-    
 
-    var dateTime = new Date(date);
-    dateTime = moment(date).format("DD-MM-YYYY hh:mm a");
-    
+    var dateTime = moment(date).format("DD-MM-YYYY hh:mm a");
     //dd/MM/yyyy hh:mm a
-    setState({ ...state, 
-      txtWhen: date, 
+    setState({
+      ...state,
+      txtWhen: date,
       txtWhenDiffFormat: dateTime
     });
     console.log(state);
   };
 
-  function handleChange(event) {
-    console.log(event);
-    
-    setState({ ...state, [event.target.id]: event.target.value });
+  function handleRemoval(nodeId) {
 
-    console.log(state);
+    var data = state.allTodoData;
+    data = data.filter(function (el) {
+      return el.counterId !== nodeId;
+    });
+    setState({
+      ...state,
+      allTodoData: data
+    });
+    return;
+  }
+
+  function handleChange(event) {
+    setState({ ...state, [event.target.id]: event.target.value });
+  }
+
+  function handleChangeTodoStatus(todoType, nodeId) {
+
+    var data = state.allTodoData;
+    for (var i in data) {
+      if (data[i].counterId == nodeId) {
+        console.log(data[i].todoType, "clicked");
+        data[i].todoType = data[i].todoType == 'active' ? 'done' : 'active';
+        break;
+      }
+    }
+    setState({
+      ...state,
+      allTodoData: data
+    });
+    return;
   }
 
   function addTodoData(event) {
@@ -120,14 +144,17 @@ export default function SignInSide() {
       ...state,
       counterId: counter,
       allTodoData: [...state.allTodoData,
-      { txtWhereToDo: state.txtWhereToDo,
+      {
+        counterId: counter,
+        txtWhereToDo: state.txtWhereToDo,
         txtWhatToDo: state.txtWhatToDo,
         drpdTodoType: state.drpdTodoType,
-        txtWhen : state.txtWhen,
-        txtWhenDiffFormat : state.txtWhenDiffFormat,
-        isActive : true,
-        todoType : 'active',
-        todoStatus : ''}]
+        txtWhen: state.txtWhen,
+        txtWhenDiffFormat: state.txtWhenDiffFormat,
+        isActive: true,
+        todoType: 'active',
+        todoStatus: ''
+      }]
     }));
 
     console.log(state);
@@ -140,16 +167,16 @@ export default function SignInSide() {
       <Grid container component="main" className={classes.todo_time_comp_con}
         justify="center">
         <Select
-                    native
-                    id="todoSearchFor"
-                    name="todoSearchFor"
-                    onChange={handleChange}
-                    value={state.todoSearchFor}
-                  >
-                    <option value='today'>Today</option>
+          native
+          id="todoSearchFor"
+          name="todoSearchFor"
+          onChange={handleChange}
+          value={state.todoSearchFor}
+        >
+          <option value='today'>Today</option>
           <option value='upcoming'>Upcoming</option>
           <option value='previous'>Previous</option>
-          </Select>
+        </Select>
       </Grid>
 
       <Grid container component="main" className={classes.root}
@@ -158,7 +185,7 @@ export default function SignInSide() {
         {/* className={classes.image} */}
         <Grid item xs={false} sm={12} md={12}></Grid>
         <Grid item xs={false} sm={4} md={7}>
-          <SimpleTabs state = {state} />
+          <SimpleTabs state={state} handler={setState} handleRemoval={handleRemoval} handleChangeTodoStatus={handleChangeTodoStatus} />
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
@@ -206,7 +233,7 @@ export default function SignInSide() {
                 />
                 <MuiPickersUtilsProvider utils={DateFnsUtils} >
                   <DateTimePicker
-                  disablePast
+                    disablePast
                     label="When?"
                     clearable
                     fullWidth
