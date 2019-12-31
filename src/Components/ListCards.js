@@ -24,8 +24,6 @@ import Avatar from 'react-avatar';
 import FamilyIcon from '../images/svg/icons8-family-100.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-import styles from './ListCards.css';
-
 const useStyles = makeStyles(theme => ({
     card: {
         maxWidth: "100%",
@@ -100,8 +98,7 @@ export default function ImgMediaCard(props) {
         if(drpdTodoType == "work") {
             returnIcon = <WorkIcon className = {classes.avtar}/>;
         } else if (drpdTodoType == "family") {
-            //returnIcon = <SvgIcon component={FamilyIcon}/>;
-            returnIcon = <WorkIcon className = {classes.avtar}/>;
+            returnIcon = <img src={FamilyIcon} width={50} height={50}/>; 
         }  else if (drpdTodoType == "personal") {
             returnIcon = <PermIdentityIcon className = {classes.avtar}/>;
         }
@@ -139,10 +136,6 @@ export default function ImgMediaCard(props) {
                 <Grid item xs={12} md={12} key={index.toString()}>
                      <div className={classes.root}>
                             
-                                {/* <BusinessIcon 
-                                className = {classes.avtar}
-                                color="secondary"
-                                /> */}
                                 {returnIcon(item.drpdTodoType)}
 
                                 <div className= {classes.content}>

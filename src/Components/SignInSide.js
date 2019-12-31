@@ -31,17 +31,17 @@ import SimpleTabs from './Tabs';
 const useStyles = makeStyles(theme => ({
   todo_time_comp_con: {
     // height: '480px',
-    maxWidth: '800px',
-    position: 'relative',
+    // maxWidth: '800px',
+    // position: 'relative',
     //margin: '0 auto',
-    top: '61px !important',
-    margin: '0px 0px 0px 16px'
+    //top: '61px !important',
+    // margin: '0px 0px 0px 16px'
   },
   root: {
     // height: '480px',
-    maxWidth: '800px',
-    position: 'relative',
-    margin: '60px auto 0 auto',
+    // maxWidth: '800px',
+    // position: 'relative',
+    // margin: '60px auto 0 auto',
     border: '1px solid blue',
 
     boxShadow: '5px 10px #888888'
@@ -74,6 +74,13 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  superContainer : {
+
+    margin: "60px auto 0 auto",
+    position: "relative",
+    maxWidth: "800px",
+    backgroundColor : "transparent"
+  }
 }));
 
 export default function SignInSide() {
@@ -170,22 +177,22 @@ export default function SignInSide() {
 
     //alignItems="center"
     <>
-      <Grid container component="main" className={classes.todo_time_comp_con}
-        justify="center">
-        <Select
-          native
-          id="todoSearchFor"
-          name="todoSearchFor"
-          onChange={handleChange}
-          value={state.todoSearchFor}
-        >
-          <option value='today'>Today</option>
-          <option value='upcoming'>Upcoming</option>
-          <option value='previous'>Previous</option>
-        </Select>
-      </Grid>
-
-      <Grid container component="main" className={classes.root}
+      <Grid container className = {classes.superContainer}>
+        <Grid container component="main" className={classes.todo_time_comp_con}
+          justify="flex-start">
+          <Select
+            native
+            id="todoSearchFor"
+            name="todoSearchFor"
+            onChange={handleChange}
+            value={state.todoSearchFor}
+          >
+            <option value='today'>Today</option>
+            <option value='upcoming'>Upcoming</option>
+            <option value='previous'>Previous</option>
+          </Select>
+        </Grid>
+        <Grid container component="main" className={classes.root}
         justify="center">
         <CssBaseline />
         {/* className={classes.image} */}
@@ -264,6 +271,7 @@ export default function SignInSide() {
             </form>
           </div>
         </Grid>
+      </Grid>
       </Grid>
     </>
   );
