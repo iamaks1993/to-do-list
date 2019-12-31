@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         padding: " 1rem 1.5rem",
         borderRadius: "10px",
         margin: "10px 0",
-        display: "flex",
+        // display: "flex",
         alignItems: "center",
         background: "#fff",
         boxShadow: "0 0 1px rgba(0, 0, 0, 0.13), 0 1px 3px rgba(0, 0, 0, 0.26)",
@@ -49,8 +49,6 @@ const useStyles = makeStyles(theme => ({
               )`
         }
     },
-
-
     title: {
         fontSize: "1rem",
         fontWeight: "500",
@@ -72,15 +70,22 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         flexDirection: "column",
         marginLeft: "15px",
+        float : "left"
       },
      avtar : {
          fontSize : "50px",
+         float : "left"
         //  borderRadius : "50%"
      }, 
      whenTime : {
         // clear : "both",
         fontSize : "13px",
+        textAlign: "right",
      },
+     cardActions : {
+         float : "right",
+         //marginTop: "10px",
+     }
      
 }));
 
@@ -98,7 +103,7 @@ export default function ImgMediaCard(props) {
         if(drpdTodoType == "work") {
             returnIcon = <WorkIcon className = {classes.avtar}/>;
         } else if (drpdTodoType == "family") {
-            returnIcon = <img src={FamilyIcon} width={50} height={50}/>; 
+            returnIcon = <img src={FamilyIcon} width={50} height={50} className = {classes.avtar}/>; 
         }  else if (drpdTodoType == "personal") {
             returnIcon = <PermIdentityIcon className = {classes.avtar}/>;
         }
