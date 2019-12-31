@@ -150,12 +150,12 @@ export default function ImgMediaCard(props) {
                                 <IconButton size="small"
                                     onClick={()=> props.handleChangeTodoStatus(item.todoType,item.counterId)}
                                 >
-                                    {item.todoType === 'active' ? <CheckIcon color="primary" data-for='handleChangeTodoStatus' data-tip='Click to complete'/> : <UndoIcon color="primary" data-for='handleChangeTodoStatus' data-tip='Click to undo'/> }
+                                    {item.todoType === 'active' ? <CheckIcon color="primary" data-for='handleChangeTodoStatus' data-tip='Complete'/> : <UndoIcon color="primary" data-for='handleChangeTodoStatus' data-tip='Undo'/> }
                                 </IconButton>
                                 <IconButton size="small" color="secondary"
                                     onClick={()=> props.handleRemoval(item.counterId)}
                                 >
-                                    <DeleteIcon data-for='handleChangeTodoStatus' data-tip='Click to delete'/>
+                                    <DeleteIcon data-for='handleChangeTodoStatus' data-tip='Delete'/>
                                 </IconButton>
                                 <ReactTooltip place="bottom" id='handleChangeTodoStatus' getContent={(dataTip) => `${dataTip}`}/>
                                 </div>
