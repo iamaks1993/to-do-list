@@ -69,7 +69,7 @@ export default function SimpleTabs(props) {
           <Tab label="Active" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <Scrollbars style={{ height: "310px" }}>
+      <Scrollbars style={{ height: "340px" }}>
        <div style={{maxHeight:"200px"}}> 
           <TabPanel value={value} index={0} className={classes.tabsPanel}>
               <ImgMediaCard state = {props.state} tabType = {'all'} handler = {props.handler} handleRemoval = {props.handleRemoval} handleChangeTodoStatus = {props.handleChangeTodoStatus}/>
