@@ -110,24 +110,60 @@ export default function ImgMediaCard(props) {
         return returnIcon;
     }
 
+    
+
+    function returnDataBasedOnTodoSearchFor(todoSearchFor) {
+
+        var data = props.state.allTodoData;
+        var filteredData = [];
+        for (var i in data) {
+
+            if (todoSearchFor == "today") { 
+
+                if(moment(moment(data[i].txtWhen).format("YYYY-MM-DD")).isSame(moment().format("YYYY-MM-DD"))) {
+                    filteredData.push(data[i]);
+                }
+
+            }  else if (todoSearchFor == "upcoming") { 
+
+                if(moment(moment(data[i].txtWhen).format("YYYY-MM-DD")).isAfter(moment().format("YYYY-MM-DD"))) {
+                    filteredData.push(data[i]);
+                }
+
+            } else {
+
+                if(moment(moment(data[i].txtWhen).format("YYYY-MM-DD")).isBefore(moment().format("YYYY-MM-DD"))) {
+                    filteredData.push(data[i]);
+                }
+            }
+        }
+        return filteredData;
+    }
+
     function getDataBasedOnRequestType(tabType, todoSearchFor) {
 
         const dateFormat = "DD/MM/YYYY";
         let tabTypeBasedData = (tabType == 'all') ? props.state.allTodoData : props.state.allTodoData.filter((obj) => obj.todoType === tabType);
-        if (todoSearchFor == "today") {
-            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(obj.txtWhen).format(dateFormat) == moment().format(dateFormat));
-        } else if (todoSearchFor == "upcoming") {
-            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(moment(obj.txtWhen),"DD/MM/YYYY") > moment(moment(),"DD/MM/YYYY"));
-        } else {
-            tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(moment(obj.txtWhen),"DD/MM/YYYY") < moment(moment(),"DD/MM/YYYY"));
-        }
+        //  if (todoSearchFor == "today") {
+        //      tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(moment(obj.txtWhen).format("YYYY-MM-DD")).isSame(moment().format("YYYY-MM-DD")));
+        //  } else if (todoSearchFor == "upcoming") {
+        //      tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(moment(obj.txtWhen).format("YYYY-MM-DD")).isAfter(moment().format("YYYY-MM-DD")));
+        //  } else {
+        //      tabTypeBasedData = tabTypeBasedData.filter((obj) => moment(moment(obj.txtWhen).format("YYYY-MM-DD")).isBefore(moment().format("YYYY-MM-DD")));
+        //  }
+        // tabTypeBasedData.map((item, index) => 
+        //     console.log(moment(moment(item.txtWhen).format("YYYY-MM-DD")).isBefore(moment().format("YYYY-MM-DD")) + moment(item.txtWhen).format("YYYY-MM-DD") + "---" +moment().format("YYYY-MM-DD"))
+        // )
+        tabTypeBasedData = returnDataBasedOnTodoSearchFor(todoSearchFor);
+        //console.log(returnDataBasedOnTodoSearchFor(todoSearchFor));
+        //return false;
          return tabTypeBasedData;
     }
 
    // console.log(getDataBasedOnRequestType(tabType, todoSearchFor));
     const tabTypeBasedData = getDataBasedOnRequestType(tabType, todoSearchFor);
 
-    // console.log(tabTypeBasedData);
+     console.log(tabTypeBasedData);
     // return false;
     if (tabTypeBasedData.length > 0) {
 
