@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
     margin: "60px auto 0 auto",
     position: "relative",
     maxWidth: "800px",
-    backgroundColor : "transparent"
+    // backgroundColor : "transparent"
   }
 }));
 

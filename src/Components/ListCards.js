@@ -85,6 +85,9 @@ const useStyles = makeStyles(theme => ({
      cardActions : {
          float : "right",
          //marginTop: "10px",
+     },
+     textStrike : {
+        textDecoration: "line-through"
      }
      
 }));
@@ -112,9 +115,9 @@ export default function ImgMediaCard(props) {
 
     
 
-    function returnDataBasedOnTodoSearchFor(todoSearchFor) {
+    function returnDataBasedOnTodoSearchFor(todoSearchFor,tabTypeBasedData) {
 
-        var data = props.state.allTodoData;
+        var data = tabTypeBasedData;
         var filteredData = [];
         for (var i in data) {
 
@@ -154,7 +157,7 @@ export default function ImgMediaCard(props) {
         // tabTypeBasedData.map((item, index) => 
         //     console.log(moment(moment(item.txtWhen).format("YYYY-MM-DD")).isBefore(moment().format("YYYY-MM-DD")) + moment(item.txtWhen).format("YYYY-MM-DD") + "---" +moment().format("YYYY-MM-DD"))
         // )
-        tabTypeBasedData = returnDataBasedOnTodoSearchFor(todoSearchFor);
+        tabTypeBasedData = returnDataBasedOnTodoSearchFor(todoSearchFor,tabTypeBasedData);
         //console.log(returnDataBasedOnTodoSearchFor(todoSearchFor));
         //return false;
          return tabTypeBasedData;
@@ -180,7 +183,7 @@ export default function ImgMediaCard(props) {
                                 {returnIcon(item.drpdTodoType)}
 
                                 <div className= {classes.content}>
-                                    <Typography  gutterBottom variant="h5" component="h2">
+                                    <Typography  gutterBottom variant="h5" component="h2" style={{textDecoration: item.todoType !== 'active' ? 'line-through' : 'none'}}>
                                         {item.txtWhatToDo} 
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
